@@ -1,0 +1,43 @@
+﻿@model BookstoreApp.Models.Customer
+@{
+    ViewBag.Title = "CustomerForm";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>CustomerForm</h2>
+
+@using (Html.BeginForm("Save", "Customers"))
+{
+    @Html.ValidationSummary();
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.Name) @*creating a label and textbox for us...using lambda expression*@
+        @Html.TextBoxFor(m => m.Name, new {@class = "form-control"})
+        @Html.ValidationMessageFor(m => m.Name)
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.BirthDate) 
+        @Html.TextBoxFor(m => m.BirthDate, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m=> m.BirthDate)
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.Email) 
+        @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.Email)
+    </div>
+    <div class="checkbox">
+        <label>
+            @Html.CheckBoxFor(m => m.IsSubscriber) Is subscriber?
+        </label>
+    </div>
+    <button type="submit" class="btn btn-default">Submit</button>
+}
+@section scripts
+{
+        @Scripts.Render("~/bundles/jqueryval")
+    <script>
+        console.log("hey");
+    </script>
+}

@@ -1,0 +1,38 @@
+﻿
+@model BookstoreApp.Models.ViewModels.RandomBookViewModel 
+@{
+    ViewBag.Title = "Random";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@* model = specifies datatype (ex: @model at line1 specfies datatype of type Book); Model = specifies object created*@
+
+<h2>@Model.RandomBook.Title</h2>
+
+<h3>List of Customers</h3>
+
+@if (Model.Customers.Count == 0)
+{
+    <p> You dont have any customers yet! </p>
+}
+else { 
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Customer Name</th>            
+        </tr>
+        </thead>
+        <tbody>
+    
+ 
+        @foreach (var customer in Model.Customers)
+        {
+            <tr>
+                @*<td><a href ="/Customers/Details/@customer.Id">@customer.Name</a></td>*@
+                <td>@Html.ActionLink(customer.Name, "Details","Customers", new {id = customer.Id}, null)</td>
+            </tr>
+        }
+        </tbody>
+    </table>
+    
+    }
+
