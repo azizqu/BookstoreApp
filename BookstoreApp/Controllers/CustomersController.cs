@@ -18,9 +18,10 @@ namespace BookstoreApp.Controllers
         }
         public ActionResult CustomerList()
         {
-            CustomerDAO.GetCustomerList();
+            //load customer from DB
+            var customers = CustomerDAO.GetCustomerList();
             
-            return View();
+            return View(customers);
         }
 
         public ActionResult CustomerForm()

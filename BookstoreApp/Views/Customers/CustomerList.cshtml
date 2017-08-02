@@ -1,5 +1,4 @@
-﻿@using BookstoreApp.Models
-@model BookstoreApp.Models.Customer
+﻿@model List<BookstoreApp.Models.Customer>
 
 
 @{
@@ -8,6 +7,26 @@
     
 }
 <h2></h2>
-<h2>Customer List</h2>
+<h2>Customers List</h2>
+
+<table class="table">
+        <thead>
+        <tr>
+            <th>Customer Name</th>            
+        </tr>
+        </thead>
+        <tbody>
+    
+ 
+        @foreach (var customer in Model)
+        {
+            <tr>
+                @*<td><a href ="/Customers/Details/@customer.Id">@customer.Name</a></td>*@
+                <td>@Html.ActionLink(customer.Name, "CustomerList","Customers", new {id = customer.Id}, null)</td>
+            </tr>
+        }
+        </tbody>
+    </table>
+    
 
 

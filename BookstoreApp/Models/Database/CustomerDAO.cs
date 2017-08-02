@@ -40,7 +40,7 @@ namespace BookstoreApp.Models.Database
 
         public static List<Customer> GetCustomerList()
         {
-            var list = new List<Customer>();
+            var customers = new List<Customer>();
             var results = MyDB.GetInstance().ExecuteSelectSql("Select * from Customers");
             while (results.Read())
             {
@@ -49,12 +49,12 @@ namespace BookstoreApp.Models.Database
                     Id = (int) results["CustomerID"],
                     Name = results["Name"].ToString(),
                     Email = results["Email"].ToString(),
-                    BirthDate = Convert.ToDateTime(results["BirthDate"]),
+                    BirthDate = (DateTime)(results["BirthDate"]),
                     IsSubscriber = (bool)results["IsSubscriber"]
                 };
-                list.Add(customer);
+                customers.Add(customer);
             }
-            return list;
+            return customers;
         }
 
 
