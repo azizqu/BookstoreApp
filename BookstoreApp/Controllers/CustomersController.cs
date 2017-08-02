@@ -45,14 +45,8 @@ namespace BookstoreApp.Controllers
         public ActionResult Edit(int id)
         {
             //todo: load customer from DB using id
-            var customer = new Customer
-            {
-                Id = id,
-                Name = "Test Customer",
-                BirthDate = new DateTime(2000, 01, 01),
-                IsSubscriber = false,
-                Email = "test@yahoo.com"
-            };
+            var customer = CustomerDAO.GetCustomer(id);
+           
             return View("CustomerForm", customer);
         }
 

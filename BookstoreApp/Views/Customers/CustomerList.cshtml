@@ -12,7 +12,11 @@
 <table class="table">
         <thead>
         <tr>
-            <th>Customer Name</th>            
+            <th>Customer Name</th>           
+            <th>Email</th>
+            <th>Birthdate</th>
+            <th>Subscriber</th>
+            <th>Actions</th>            
         </tr>
         </thead>
         <tbody>
@@ -22,7 +26,11 @@
         {
             <tr>
                 @*<td><a href ="/Customers/Details/@customer.Id">@customer.Name</a></td>*@
-                <td>@Html.ActionLink(customer.Name, "CustomerList","Customers", new {id = customer.Id}, null)</td>
+                <td>@Html.ActionLink(customer.Name, "CustomerList","Customers", new {id = customer.Id}, null)</td>               
+                <td>@customer.Email</td>
+                <td>@customer.BirthDate.ToShortDateString()</td>
+                <td>@customer.IsSubscriber</td>
+                <td><a href="/Customers/Edit/@customer.Id">Edit </a> | <a href="/customers/Delete/@customer.Id">Delete</a></td>
             </tr>
         }
         </tbody>
