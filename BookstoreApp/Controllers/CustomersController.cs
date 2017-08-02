@@ -36,18 +36,33 @@ namespace BookstoreApp.Controllers
             if (!ModelState.IsValid)
                 return View("CustomerForm", customer);
 
+            var customerId = int.Parse(Request["customerId"]);
+            customer.Id = customerId;
 
-
-            CustomerDAO.Create(customer);
-
+            if(customer.Id ==0 )
+                CustomerDAO.Create(customer);
+            else
+            {
+                CustomerDAO.Update(customer);
+            }
             return RedirectToAction("index");
         }
         public ActionResult Edit(int id)
         {
             //todo: load customer from DB using id
             var customer = CustomerDAO.GetCustomer(id);
-           
+            if (customer == null)
+                return HttpNotFound();
+
             return View("CustomerForm", customer);
+        }
+        public ActionResult Delete(int id)
+        {
+            var customer = CustomerDAO.GetCustomer(id);
+            if (customer == null)
+                return HttpNotFound();
+            CustomerDAO.Delete(customer);
+            return RedirectToAction("CustomerList");
         }
 
         public ActionResult Index()

@@ -58,6 +58,22 @@ namespace BookstoreApp.Models.Database
         }
 
 
+        public static void Update(Customer customer)
+        {
+            var sql = string.Format("Update Customers set Name = '{0}'" +
+                                    ",Email = '{1}', Birthdate ='{2}', IsSubscriber ='{3}' Where CustomerID ={4}",
+                customer.Name, customer.Email, customer.BirthDate, customer.IsSubscriber, customer.Id);
+            MyDB.GetInstance().ExecuteSql(sql);
+        }
+
+        public static void Delete(Customer customer)
+        {
+            var db = MyDB.GetInstance();
+            var sql =
+                string.Format("Delete From Customers where CustomerID = {0}", customer.Id);
+            db.ExecuteSql(sql);
+        }
 
     }
 }
+

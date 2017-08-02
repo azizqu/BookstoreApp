@@ -32,6 +32,9 @@
             @Html.CheckBoxFor(m => m.IsSubscriber) Is subscriber?
         </label>
     </div>
+
+
+    @Html.Hidden("customerId",@Model!=null? Model.Id:0) 
     <button type="submit" class="btn btn-default">Submit</button>
 }
 @section scripts
