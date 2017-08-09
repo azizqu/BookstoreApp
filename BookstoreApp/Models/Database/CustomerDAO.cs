@@ -74,6 +74,14 @@ namespace BookstoreApp.Models.Database
             db.ExecuteSql(sql);
         }
 
+        public static void Delete(int id)
+        {
+            var db = MyDB.GetInstance();
+            var sql =
+                string.Format("Delete From Customers where CustomerID = {0}", id);
+            db.ExecuteSql(sql);
+        }
+
     }
 }
 

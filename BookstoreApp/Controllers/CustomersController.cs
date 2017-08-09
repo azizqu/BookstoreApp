@@ -45,8 +45,9 @@ namespace BookstoreApp.Controllers
             {
                 CustomerDAO.Update(customer);
             }
-            return RedirectToAction("index");
+            return RedirectToAction("CustomerList");
         }
+        
         public ActionResult Edit(int id)
         {
             //todo: load customer from DB using id

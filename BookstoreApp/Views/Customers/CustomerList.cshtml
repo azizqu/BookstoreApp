@@ -9,7 +9,7 @@
 <h2></h2>
 <h2>Customers List</h2>
 
-<table class="table">
+<table class="table customers table-striped">
         <thead>
         <tr>
             <th>Customer Name</th>           
@@ -30,11 +30,68 @@
                 <td>@customer.Email</td>
                 <td>@customer.BirthDate.ToShortDateString()</td>
                 <td>@customer.IsSubscriber</td>
-                <td><a href="/Customers/Edit/@customer.Id">Edit </a> | <a href="/customers/Delete/@customer.Id">Delete</a></td>
+                <td><a href="/Customers/Edit/@customer.Id">Edit </a> | <a class ="deleteCustomer" id="deleteCustomer" href="/customers/Delete/@customer.Id" data-customerid= "@customer.Id">  Delete</a></td>
             </tr>
         }
         </tbody>
-    </table>
-    
+</table>
+
+<button class="ajaxPost">Test Ajax Post</button>
+
+@section scripts
+{
+    <script>
+
+        $(function () {
+
+            $(".customers").DataTable();
+
+            $(".deleteCustomer").click(function (event) {
+                event.preventDefault();
+                console.log("Deleteing...");
+                var $this = $(this);
+                bootbox.confirm("Are you sure?",
+                    function(confirm) {
+                        if (confirm)
+                            console.log($this.data("customerid"));
+                        $.ajax({
+                            type: 'DELETE',
+                            url: '/api/Customers/' + $this.data("customerid"),
+                            success: function(data) {
+                                console.log(data);
+                                $this.parents("tr").remove();
+                            }
+                        })
+                    });
+//                if (!confirm("Are you sure?"))
+//                    event.preventDefault();
+            });
+            $(".ajaxPost").click(function() {
+                var customer = {
+                    "Name": "Ajax",
+                    "BirthDate": "10/10/1990",
+                    "IsSubscriber": "true",
+                    "Email": "ajax@email.com"
+                }
+
+                
+                    $.ajax({
+                        type: 'POST',
+                        url: '/api/Customers/',
+                        data: JSON.stringify(customer),
+                        contentType: 'application/json; charset=utf-8',
+                        dataType: 'json',
+                        success: function(data) {
+                            console.log(data);
+
+                        }
+                    });
+                
+
+            });
+        })
+
+    </script>
+}    
 
 
